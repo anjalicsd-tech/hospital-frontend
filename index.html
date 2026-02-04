@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 350px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .dashboard {
+            display: none;
+            padding: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .logout {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div class="container" id="loginPage">
+    <h2>Hospital Login</h2>
+
+    <select id="role">
+        <option value="">Select Role</option>
+        <option value="receptionist">Receptionist</option>
+        <option value="doctor">Doctor</option>
+    </select>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- RECEPTIONIST DASHBOARD -->
+<div class="dashboard" id="receptionistDashboard">
+    <h2>Receptionist Dashboard</h2>
+
+    <div class="card">Register New Patient</div>
+    <div class="card">Book Appointment</div>
+    <div class="card">Patient Records</div>
+    <div class="card">Billing & Payments</div>
+
+    <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<!-- DOCTOR DASHBOARD -->
+<div class="dashboard" id="doctorDashboard">
+    <h2>Doctor Dashboard</h2>
+
+    <div class="card">View Appointments</div>
+    <div class="card">Patient Medical History</div>
+    <div class="card">Prescriptions</div>
+    <div class="card">Lab Reports</div>
+
+    <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<script>
+    function login() {
+        const role = document.getElementById("role").value;
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (role === "receptionist" && username === "reception" && password === "1234") {
+            showDashboard("receptionistDashboard");
+        } 
+        else if (role === "doctor" && username === "doctor" && password === "1234") {
+            showDashboard("doctorDashboard");
+        } 
+        else {
+            alert("Invalid Login Credentials");
+        }
+    }
+
+    function showDashboard(dashboardId) {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById(dashboardId).style.display = "block";
+    }
+
+    function logout() {
+        document.getElementById("loginPage").style.display = "block";
+        document.getElementById("receptionistDashboard").style.display = "none";
+        document.getElementById("doctorDashboard").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
